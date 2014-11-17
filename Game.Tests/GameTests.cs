@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Game;
-using Game.Players;
+using Sorry;
+using Sorry.Players;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GameTests.cs
@@ -10,12 +9,12 @@ namespace GameTests.cs
     [TestClass]
     public class GameTest
     {
-        private GameOfSorry _game;
+        private Game _game;
 
         [TestInitialize]
         public void Initialize()
         {
-            _game = new GameOfSorry();
+            _game = new Game();
             var players = new List<Player>() { new Player() };
 
             _game.InitializePlayers(players);
@@ -87,7 +86,7 @@ namespace GameTests.cs
         }
 
         [TestMethod]
-        public void MovePlayer_called62Times_Piece_PieceInSecondSpaceOfHomeRow()
+        public void MovePlayer_called62Times_Piece_PieceInSecondSpaceSafeZone()
         {
             var player = _game.Players.First();
 

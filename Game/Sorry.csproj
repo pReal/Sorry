@@ -7,8 +7,8 @@
     <ProjectGuid>{390752C4-DE30-44BC-A2FF-C0CA41945E93}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Game</RootNamespace>
-    <AssemblyName>Game</AssemblyName>
+    <RootNamespace>Sorry</RootNamespace>
+    <AssemblyName>Sorry</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,10 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board\Board.cs" />
-    <Compile Include="Board\PieceLocation.cs" />
+    <Compile Include="Board\BoardManager.cs" />
     <Compile Include="GamePieces\GamePiece.cs" />
-    <Compile Include="Game\GameOfSorry.cs" />
+    <Compile Include="Game\Game.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

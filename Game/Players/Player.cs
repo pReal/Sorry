@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-
-namespace Game.Players
+﻿namespace Sorry.Players
 {
     public class Player
     {
@@ -9,7 +6,7 @@ namespace Game.Players
 
         public Player()
         {
-            GamePiece = new GamePiece(this);
+            GamePiece = new GamePiece();
         }
     }
 

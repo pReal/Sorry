@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Game\Game.csproj", "{390752C4-DE30-44BC-A2FF-C0CA41945E93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorry", "Game\Sorry.csproj", "{390752C4-DE30-44BC-A2FF-C0CA41945E93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTests.cs", "GameTests.cs\GameTests.cs.csproj", "{D6598727-20CC-4AA8-BE19-5CE365636ECA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorry.Tests", "Game.Tests\Sorry.Tests.csproj", "{D6598727-20CC-4AA8-BE19-5CE365636ECA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,13 +1,11 @@
-﻿using Game.Players;
-
-namespace Game
+﻿namespace Sorry
 {
     public class GamePiece
     {
         public bool InStartSpace { get; set; }
         public bool InSafeZone { get; set; }
 
-        public GamePiece(Player player)
+        public GamePiece()
         {
             InStartSpace = true;
             InSafeZone = false;

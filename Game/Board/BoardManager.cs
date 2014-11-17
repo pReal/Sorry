@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Game
+namespace Sorry
 {
-public class Board{
+public class BoardManager{
 
         public ReadOnlyDictionary<int, GamePiece> StandardSpaces { get; private set; }
         public ReadOnlyDictionary<int, GamePiece> SafetyZone { get; private set; }
@@ -15,10 +12,9 @@ public class Board{
         private Dictionary<int, GamePiece> _standardSpaces;
         private Dictionary<int, GamePiece> _safetyZone;
 
-        public Board()
+        public BoardManager()
         {
             CreateStandardSpaces();
-
             CreateSafetyZone();
         }
 
@@ -46,40 +42,6 @@ public class Board{
             StandardSpaces = new ReadOnlyDictionary<int, GamePiece>(_standardSpaces);
         }
 
-        public void RemovePieceFromSpace(int spaceNumber, SpaceType spaceType)
-        {
-            switch(spaceType)
-            {
-                case SpaceType.Standard:
-                {
-                    _standardSpaces[spaceNumber] = null;
-                    break;
-                }
-                case SpaceType.SafeZone:
-                {
-                    _safetyZone[spaceNumber] = null;
-                    break;
-                }   
-            }
-        }
-
-        public void PlacePieceOnSpace(int spaceNumber, SpaceType spaceType, GamePiece gamePiece)
-        {
-            switch (spaceType)
-            {
-                case SpaceType.Standard:
-                    {
-                        _standardSpaces[spaceNumber] = gamePiece;
-                        break;
-                    }
-                case SpaceType.SafeZone:
-                    {
-                        _safetyZone[spaceNumber] = gamePiece;
-                        break;
-                    }
-            }
-        }
-
         public PieceLocation GetPieceLocation(GamePiece gamePiece)
         {
             
@@ -103,29 +65,34 @@ public class Board{
         }
 
 
-        public void MovePiece(GamePiece gamePiece, SpaceType spaceType)
+        public void PlacePiece(GamePiece gamePiece, SpaceType spaceType)
         {
             PieceLocation currentPieceLocation = GetPieceLocation(gamePiece);
             var newPiecePosition = currentPieceLocation.SpaceNumber + 1;
             
-            RemovePieceFromSpace(currentPieceLocation.SpaceNumber, currentPieceLocation.SpaceType);
-            
             switch (spaceType)
             {
                 case SpaceType.Standard:
-                {
-                    if (currentPieceLocation.SpaceNumber == 60)
+                {   
+                    if (newPiecePosition == 61)
                     {
-                        MovePiece(gamePiece, SpaceType.SafeZone);
+                        gamePiece.InSafeZone = true;
+                        _standardSpaces[currentPieceLocation.SpaceNumber] = null;
+                        PlacePiece(gamePiece, SpaceType.SafeZone);
                     }
                     else
-                    {           
+                    {
+                        _standardSpaces[currentPieceLocation.SpaceNumber] = null;
                         _standardSpaces[newPiecePosition] = gamePiece;
                     }
                     break;
                 }
                 case SpaceType.SafeZone:
                 {
+                    if (currentPieceLocation.SpaceNumber > 0)
+                    {
+                        _safetyZone[currentPieceLocation.SpaceNumber] = null;
+                    }
                     _safetyZone[newPiecePosition] = gamePiece;
                     break;
                 }
@@ -137,6 +104,19 @@ public class Board{
     {
         Standard,
         SafeZone
+    }
+
+    public struct PieceLocation
+    {
+        public SpaceType SpaceType { get; private set; }
+        public int SpaceNumber { get; private set; }
+
+        public PieceLocation(SpaceType spaceType, int spaceNumber)
+            : this()
+        {
+            SpaceType = spaceType;
+            SpaceNumber = spaceNumber;
+        }
     }
 
 }

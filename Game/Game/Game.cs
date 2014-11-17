@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Game.Players;
+using Sorry.Players;
 
-namespace Game
+namespace Sorry
 {
-    public class GameOfSorry
+    public class Game
     {
         public ReadOnlyCollection<Player> Players { get; private set; }
 
-        private readonly Board _gameBoard;
+        private readonly BoardManager _boardManager;
 
-        public GameOfSorry()
+        public Game()
         {
-            _gameBoard = new Board();
+            _boardManager = new BoardManager();
         }
 
         public void InitializePlayers(IEnumerable<Player> players)
@@ -33,18 +33,18 @@ namespace Game
 
         public PieceLocation LocatePlayersGamePiece(Player player)
         {
-            return _gameBoard.GetPieceLocation(player.GamePiece);
+            return _boardManager.GetPieceLocation(player.GamePiece);
         }
 
         private void IncrementPlayersPiece(GamePiece gamePiece)
         {
             if (gamePiece.InSafeZone)
             {
-                _gameBoard.MovePiece(gamePiece, SpaceType.SafeZone);
+                _boardManager.PlacePiece(gamePiece, SpaceType.SafeZone);
             }
             else
             {
-                _gameBoard.MovePiece(gamePiece, SpaceType.Standard);
+                _boardManager.PlacePiece(gamePiece, SpaceType.Standard);
             }
         }
 
