@@ -27,7 +27,7 @@ namespace GameTests.cs
         }
 
         [TestMethod]
-        public void MovePlayer_GamePieceInStartSpaceTrue_InStartSpaceSetToFalse()
+        public void MovePlayer_GamePiece_InStartSpaceTrue()
         {
             var player = _game.Players.First();
 
@@ -39,7 +39,7 @@ namespace GameTests.cs
         }
 
         [TestMethod]
-        public void MovePlayer_CalledOnce_PieceInStartSpace_PieceIsIn1stSpaceOnGameBoard()
+        public void MovePlayer_CalledOnceWhilePieceIsInStartSpace_PieceIsIn1stSpaceOnGameBoard()
         {
             var player = _game.Players.First();
 
@@ -86,7 +86,7 @@ namespace GameTests.cs
         }
 
         [TestMethod]
-        public void MovePlayer_called62Times_Piece_PieceInSecondSpaceSafeZone()
+        public void MovePlayer_Called62Times_PieceInSecondSpaceSafeZone()
         {
             var player = _game.Players.First();
 
@@ -98,6 +98,25 @@ namespace GameTests.cs
             Assert.AreEqual(SpaceType.SafeZone, pieceLocation.SpaceType);
         }
 
+        [TestMethod]
+        public void MovePlayer_called66Times_PieceAtHome_EqualsTrue()
+        {
+            var player = _game.Players.First();
+
+            MovePlayer(player, 66);
+
+            Assert.IsTrue(player.GamePiece.InHome);
+        }
+
+        [TestMethod]
+        public void MovePlayer_EntersHome_PlayerIsWinner()
+        {
+            var player = _game.Players.First();
+
+            MovePlayer(player, 66);
+
+            Assert.AreEqual(player, _game.Winner);
+        }
 
         private void MovePlayer(Player player, int numOfMoves)
         {

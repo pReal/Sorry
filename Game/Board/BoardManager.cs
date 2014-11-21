@@ -89,6 +89,11 @@ public class BoardManager{
                 }
                 case SpaceType.SafeZone:
                 {
+                    if (newPiecePosition == 6)
+                    {
+                        gamePiece.InHome = true;
+                    }
+
                     if (currentPieceLocation.SpaceNumber > 0)
                     {
                         _safetyZone[currentPieceLocation.SpaceNumber] = null;
@@ -103,7 +108,8 @@ public class BoardManager{
     public enum SpaceType
     {
         Standard,
-        SafeZone
+        SafeZone,
+        Home
     }
 
     public struct PieceLocation

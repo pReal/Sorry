@@ -8,6 +8,8 @@ namespace Sorry
     public class Game
     {
         public ReadOnlyCollection<Player> Players { get; private set; }
+        public Player Winner { get; private set; }
+
 
         private readonly BoardManager _boardManager;
 
@@ -29,6 +31,8 @@ namespace Sorry
             }
 
             IncrementPlayersPiece(player.GamePiece);
+
+            CheckForWin(player);
         }
 
         public PieceLocation LocatePlayersGamePiece(Player player)
@@ -48,6 +52,13 @@ namespace Sorry
             }
         }
 
+        private void CheckForWin(Player player)
+        {
+            if (player.GamePiece.InHome)
+            {
+                Winner = player;
+            }
+        }
     }
 }
 
